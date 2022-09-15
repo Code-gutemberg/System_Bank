@@ -3,31 +3,6 @@ from cliente import Cliente
 from conta import ContaCorrente, ContaPoupanca
 
 
-"""
-# Criar um sistema bancario que tem clientes, contas, e um banco. A ideia
-# é que o cliente tenha uma conta (poupança/corrente) e que  possa
-# sacar/depositar
-# Conta corrente tem um limite extra; Banco tem clientes e contas
-
-# Dicas:
-
-# Criar classe cliente que herda da classe Pessoa (herança)  =  OK
-    # Pessoa tem nome e idade ( com getters)                 =  OK
-    # cliente tem conta (agregação da classe CC e CP)        =  OK
-# Criar Classes CP e CC que herdam de Conta                   = OK
-    # CC deve ter limite extra                                = OK
-    # Contas tem agencia, numero e saldo                      = OK
-    # conta tem que ter metodo de deposito                    = OK
-    # conta (super Classe) deve ter metodo sacar abstrato     = OK
-# Criar classe banco para AGREGAR classes clientes e contas (agregação)
-# Banco sera responsavel autenticar o cliente e as contas da seguinte maneira:
-    # Banco tem contas e clientes (agregação)
-    # Checar se a agencia é daquele banco
-    # Checar se o cliente é daquele banco
-    # Checar se a conta é daquele banco
-# Só será possivel sacar se passar na autenticacao do banco
-"""
-
 # Instanciando o banco
 banco = Banco()
 

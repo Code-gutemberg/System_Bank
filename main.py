@@ -1,20 +1,34 @@
-from banco import Banco
-from cliente import Cliente
-from conta import ContaCorrente, ContaPoupanca
+from query.bank import Bank
+from query.client import Cliente
+from query.account import ContaCorrente, ContaPoupanca
+from time import sleep
+import app.interface as interface
+import app.treatment as treatment
+import os
 
+bank = Bank()
 
-# Instanciando o banco
-banco = Banco()
-
-# Instanciando os clientes
-cliente1 = Cliente('Alex', 30)
-cliente2 = Cliente('Delis', 25)
-cliente3 = Cliente('Fabricio', 45)
-
-# Instanciando as contas
-conta1 = ContaCorrente('12345', '0001-01', 0)
-conta2 = ContaPoupanca('56789', '0002-02', 0)
-conta3 = ContaCorrente('09888', '03102-02', 0)
+while True:
+    interface.title('BANCO DIGITAL - GUTEMBANK')
+    interface.subtitle()
+    menu = treatment.read_int('Digite o código correspondente: ')
+    if menu == 1:
+        ...
+    elif menu == 2:
+        ...
+    elif menu == 3:
+        ...
+    elif menu == 4:
+        interface.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
+        sleep(2)
+        os.system('cls')
+        break
+    else:
+        interface.error_code()
+        sleep(2)
+        os.system('cls')
+        continue
+'''
 
 # Instanciando as contas aos clientes
 cliente1.inserir_conta(conta1)
@@ -40,3 +54,4 @@ if banco.autenticar(cliente2):
 else:
     print('cliente não autenticado')
 print('=' * 20)
+'''

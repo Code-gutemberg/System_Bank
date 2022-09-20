@@ -1,27 +1,25 @@
-class Pessoa:
-    def __init__(self, nome, idade):
-        self._nome = nome
-        self._idade = idade
-
-    # Getter
-    @property
-    def nome(self):
-        return self._nome
+class Person:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
 
     @property
-    def idade(self):
-        return self._idade
+    def name(self):
+        return self._name
+
+    @property
+    def age(self):
+        return self._age
 
 
-# Herança simples
-class Cliente(Pessoa):
-    def __init__(self, nome, idade):
-        super().__init__(nome, idade)
-        self.conta = None
-        self._nome = nome
+class Client(Person):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+        self.account = None
+        self._name = name
 
-    def inserir_conta(self, conta):
-        self.conta = conta
+    def insert_account(self, account):
+        self.account = account
 
-    def nome(self):
-        print(self._nome)
+    def name(self):
+        print(self._name)

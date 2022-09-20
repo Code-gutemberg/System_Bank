@@ -1,23 +1,30 @@
+import json
+
+
 class Bank:
     def __init__(self):
-        self.agencias = ['12345', '56789']
-        self.clientes = []
-        self.contas = []
+        ...
 
-    def inserir_cliente(self, cliente):
-        self.clientes.append(cliente)
+    def insert_client(self, client):
+        self.client.append(client)
 
-    def inserir_conta(self, conta):
-        self.contas.append(conta)
+    def insert_account(self, account):
+        self.accounts.append(account)
 
-    def autenticar(self, cliente):
-        if cliente not in self.clientes:
-            return None
+    def auth(self, agency='', account='', password='', name=''):
+        self.agency = agency
+        self.account = account
+        self.password = password
+        self.name = name
+        a = agency
+        ac = account
+        p = password
+        with open('db.json', 'r') as file:
+            db_json = file.read()
+            db_json = json.loads(db_json)
 
-        if cliente.conta not in self.contas:
+            for v in db_json.values():
+                if a == v["Agencia"] and ac == v["Conta"] and p == v["Senha"]:
+                    name = v["Nome"]
+                    return True, name
             return False
-
-        if cliente.conta.agencia not in self.agencias:
-            return False
-
-        return True

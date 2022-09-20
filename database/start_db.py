@@ -2,7 +2,7 @@ import json
 
 # Criando o dicionario que ficara no formato Json
 db = {
-    'Pessoa 1': {
+    'Cliente_01': {
         'Nome': 'Alex',
         'Senha': '0000',
         'Idade': '30',
@@ -11,7 +11,7 @@ db = {
         'Saldo': 0
     },
 
-    'Pessoa 2': {
+    'Cliente_02': {
         'Nome': 'Delis',
         'Senha': '0000',
         'Idade': '25',
@@ -29,6 +29,7 @@ db_json = json.dumps(db, indent=True)
 # Criando o arquivo .Json
 with open('db.json', 'w+') as file:
     file.write(db_json)
+
 
 '''
 # Lendo o arquivo .Json

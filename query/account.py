@@ -1,51 +1,48 @@
 from abc import ABC, abstractmethod
 
 
-# classe abstrata
 class Accounts(ABC):
-    def __init__(self, agencia, conta, saldo):
-        self.agencia = agencia
-        self.conta = conta
-        self.saldo = saldo
+    def __init__(self, agency, account, balance):
+        self.agency = agency
+        self.account = account
+        self.balance = balance
 
-    def depositar(self, valor):
-        if not isinstance(valor, (int, float)):
+    def deposit(self, value):
+        if not isinstance(value, (int, float)):
             raise ValueError('valor do depósito precisa ser numérico')
 
-        self.saldo += valor
-        self.detalhes()
+        self.balance += value
+        self.details()
 
-    def detalhes(self):
-        print(f'Agência: {self.agencia}')
-        print(f'Conta: {self.conta}')
-        print(f'Saldo: {self.saldo}')
+    def details(self):
+        print(f'Agência: {self.agency}')
+        print(f'Conta: {self.account}')
+        print(f'Saldo: {self.balance}')
 
     @abstractmethod
-    def sacar(self, valor):
+    def withdraw(self, value):
         ...
 
 
-# Henrança Simples
-class ContaCorrente(Accounts):
-    def __init__(self, agencia, conta, saldo, limite=100):
-        super().__init__(agencia, conta, saldo)
-        self.limite = limite
+class CurrentAccount(Accounts):
+    def __init__(self, agency, account, balance, limit=100):
+        super().__init__(agency, account, balance)
+        self.limit = limit
 
-    def sacar(self, valor):
-        if (self.saldo + self.limite) < valor:
+    def withdraw(self, value):
+        if (self.balance + self.limit) < value:
             print('Saldo insuficiente')
             return
 
-        self.saldo -= valor
-        self.detalhes()
+        self.balance -= value
+        self.details()
 
 
-# Henrança Simples
-class ContaPoupanca(Accounts):
-    def sacar(self, valor):
-        if self.saldo < valor:
+class SavingsAccount(Accounts):
+    def withdraw(self, value):
+        if self.balance < value:
             print('Saldo insuficiente')
             return
 
-        self.saldo -= valor
-        self.detalhes()
+        self.balance -= value
+        self.details()

@@ -14,5 +14,11 @@
   "Conta": "02362-1",
   "Agencia": "0236",
   "Saldo": 0
- }
+ },
+ "Administrador": {
+    "Nome": "root_",
+    "Senha": "0000",
+    "Conta": "0000-99",
+    "Agencia": "0099"
+   }
 }

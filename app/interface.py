@@ -15,9 +15,15 @@ def subtitle():
     print('=' * 50)
 
 
-def user_db():
+def subtitle_adm():
+    menu = dict()
+    menu[1] = 'Adicionar Cliente \t[ + ]'
+    menu[2] = 'Remover Cliente \t[ - ]'
+    menu[3] = 'Consultar Cliente \t[...]'
+    menu[4] = 'Sair do Sistema \t[ ! ]'
+    for k, v in menu.items():
+        print(f'{k} - {v}')
     print('=' * 50)
-    title('[=] BANCO DE DADOS'.center(50))
 
 
 def error_code():

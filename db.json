@@ -1,0 +1,18 @@
+{
+ "Cliente_01": {
+  "Nome": "Alex Gutemberg",
+  "Senha": "0000",
+  "Idade": "30",
+  "Conta": "02361-0",
+  "Agencia": "0236",
+  "Saldo": 0
+ },
+ "Cliente_02": {
+  "Nome": "Delis de Almeida",
+  "Senha": "0000",
+  "Idade": "25",
+  "Conta": "02362-1",
+  "Agencia": "0236",
+  "Saldo": 0
+ }
+}

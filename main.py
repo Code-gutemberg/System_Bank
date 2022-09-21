@@ -1,80 +1,127 @@
+import json
 from query.bank import Bank
+from query.client import Client
+from query.account import CurrentAccount as current
+from query.account import SavingsAccount as savings
+from random import randint
 from time import sleep
-import app.interface as interface
-import app.treatment as treatment
+import app.interface as face
+import app.treatment as treat
 import os
 
 bank = Bank()
 
 
 while True:
-    interface.title('BANCO DIGITAL - GUTEMBANK')
+    face.title('BANCO DIGITAL - GUTEMBANK')
     ag = input('Agencia: ')
     acc = input('Conta: ')
     pas = input('Senha: ')
     print('Checando banco de dados...')
-    sleep(2)
+    sleep(1)
     if bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] != 'root_':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
-        interface.title('INICIANDO SISTEMA')
+        face.title('INICIANDO SISTEMA')
         sleep(2)
         os.system('cls')
         while True:
             print(f'Usuário: {name}')
             print(f'Agencia: {ag}')
             print(f'Conta: {acc}')
-            interface.title('BANCO DIGITAL - GUTEMBANK')
-            interface.subtitle()
-            menu = treatment.read_int('Digite o código correspondente: ')
-            if menu == 1:
+            face.title('BANCO DIGITAL - GUTEMBANK')
+            face.subtitle()
+            menu_1 = treat.read_int('Digite o código correspondente: ')
+            if menu_1 == 1:
                 ...
-            elif menu == 2:
+            elif menu_1 == 2:
                 ...
-            elif menu == 3:
+            elif menu_1 == 3:
                 ...
-            elif menu == 4:
-                interface.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
+            elif menu_1 == 4:
+                face.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
                 sleep(2)
                 os.system('cls')
                 break
             else:
-                interface.error_code()
+                face.error_code()
                 sleep(2)
                 os.system('cls')
                 continue
     elif bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] == 'root_':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
-        interface.title('INICIANDO SISTEMA')
-        sleep(2)
+        face.title('INICIANDO SISTEMA')
+        sleep(1)
         os.system('cls')
         while True:
             print(f'Usuário: {name}')
             print(f'Agencia: {ag}')
             print(f'Conta: {acc}')
-            interface.title('BANCO DIGITAL - GUTEMBANK')
-            interface.subtitle_adm()
-            menu = treatment.read_int('Digite o código correspondente: ')
-            if menu == 1:
-                ...
-            elif menu == 2:
-                ...
-            elif menu == 3:
-                ...
-            elif menu == 4:
-                interface.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
-                sleep(2)
+            face.title('BANCO DIGITAL - GUTEMBANK')
+            face.subtitle_adm()
+            menu_1 = treat.read_int('Digite o código correspondente: ')
+            if menu_1 == 1:
+                while True:
+                    os.system('cls')
+                    face.title('ADICIONAR CLIENTE [+]')
+                    client_name = input('Nome: ')
+                    client_age = int(input('Idade: '))
+                    # instanciar o cliente
+                    new_client = Client(client_name, client_age)
+                    print('[1] Conta Poupança')
+                    print('[2] Conta Corrente')
+                    menu_2 = treat.read_int('Digite o código correspondente: ')
+                    if menu_2 == 1:
+                        new_number = str(randint(0, 100))
+                        # instanciar a conta
+                        new_acc = savings('0236', '0236'+new_number+'-1', 0)
+                        # instanciar a conta para o cliente
+                        new_client.insert_account(new_acc)
+                        # instanciar o cliente e a conta ao banco
+                        bank.insert_client(new_client)
+                        bank.insert_account(new_acc)
+                        new_client.name()
+                        new_client.account.details()
+                        p = new_client.account
+                        s = json.dumps(bank.para_dict(p))
+                        print(s)
+                        input()
+                        os.system('cls')
+                        break
+                    elif menu_2 == 2:
+                        new_number = str(randint(0, 100))
+                        # instanciar a conta
+                        new_acc = current('0236', '0236'+new_number+'-0', 0)
+                        # instanciar a conta para o cliente
+                        new_client.insert_account(new_acc)
+                        # instanciar o cliente e a conta ao banco
+                        bank.insert_client(new_client)
+                        bank.insert_account(new_acc)
+                    else:
+                        face.error_code()
+                        sleep(1)
+                        os.system('cls')
+                        continue
+            elif menu_1 == 2:
+                os.system('cls')
+                face.title('REMOVER CLIENTE [-]')
+            elif menu_1 == 3:
+                os.system('cls')
+                face.title('CONSULTAR CLIENTE [...]')
+            elif menu_1 == 4:
+                face.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
+                sleep(1)
                 os.system('cls')
                 break
             else:
-                interface.error_code()
-                sleep(2)
+                face.error_code()
+                sleep(1)
                 os.system('cls')
                 continue
     else:
         print('Usuario não existe')
-        sleep(2)
+        sleep(1)
         os.system('cls')
         continue
     break

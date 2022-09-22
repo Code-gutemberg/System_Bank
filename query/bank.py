@@ -16,17 +16,16 @@ class Bank:
         self.agency = agency
         self.account = account
         self.password = password
-        self._name = name
+        self.name = name
         a = agency
         ac = account
         p = password
         with open('db.json', 'r') as file:
             db_json = file.read()
             db_json = json.loads(db_json)
-
             for v in db_json.values():
-                if a == v["Agencia"] and ac == v["Conta"] and p == v["Senha"]:
-                    name = v["Nome"]
+                if a == v["agency"] and ac == v["account"] and p == v["password"]:
+                    name = v["name"]
                     return True, name
             return False
 
@@ -38,11 +37,14 @@ class Bank:
             info2 = info2.__dict__
         # unindo os 2 dicionarios em 1 só
         self.info3 = dict(info1, **info2)
-        return self.info3
+        self.info4 = {}
+        # coloca os dicionarios unidos dentro do dicionario nome do cliente
+        self.info4[info1["name"]] = self.info3
+        return self.info4
 
-    def write_account(self, dict):
-        self.db_json = dict
-
+    def write_account(self, _json):
+        self.db_json = _json
+        print(self.db_json)
         # adicionando o cliente no arquivo .Json
-        with open('db2.json', 'a+') as file:
-            file.write(self.db_json)
+        with open('db2.json', 'a+') as file2:
+            file2.write(self.db_json)

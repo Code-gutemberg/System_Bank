@@ -83,7 +83,7 @@ while True:
                         bank.insert_account(new_acc)
                         info = Person(client_name, client_age)
                         acc = bank.accounts
-                        a = json.dumps(bank.to_dict(info, acc), indent=True)
+                        a = json.dumps(bank.to_dict(info, acc), indent=4)
                         print(a)
                         bank.write_account(a)
                         input()

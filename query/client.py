@@ -9,10 +9,9 @@ class Client(Person):
         super().__init__(name, age)
         self.account = None
         self._name = name
-        self._age = age
 
     def insert_account(self, account):
         self.account = account
 
-    def nome(self):
-        print(self._name)
+    def name(self):
+        self.name = self._name

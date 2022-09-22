@@ -1,1 +1,1 @@
-insert_account
+bank.write_account(a)

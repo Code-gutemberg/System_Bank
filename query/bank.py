@@ -8,27 +8,9 @@ class Bank:
 
     def insert_client(self, client):
         self.clients = client
-        '''db_json = ''
-        self.db_json = db_json
-
-        # Transformando o dicionario em Json
-        db_json = json.dumps(client, indent=True)
-
-        # adicionando o cliente no arquivo .Json
-        with open('db2.json', 'a+') as file:
-            file.write(db_json)'''
 
     def insert_account(self, account):
         self.accounts = account
-        '''db_json = ''
-        self.db_json = db_json
-
-        # Transformando o dicionario em Json
-        db_json = json.dumps(account, indent=True)
-
-        # adicionando o cliente no arquivo .Json
-        with open('db2.json', 'a+') as file:
-            file.write(db_json)'''
 
     def auth(self, agency='', account='', password='', name=''):
         self.agency = agency
@@ -48,9 +30,19 @@ class Bank:
                     return True, name
             return False
 
-    def para_dict(self, obj):
+    def to_dict(self, info1, info2):
         # Se for um objeto, transforma num dict
-        if hasattr(obj, '__dict__'):
-            obj = obj.__dict__
-        
-        return obj
+        if hasattr(info1, '__dict__'):
+            info1 = info1.__dict__
+        if hasattr(info2, '__dict__'):
+            info2 = info2.__dict__
+        # unindo os 2 dicionarios em 1 só
+        self.info3 = dict(info1, **info2)
+        return self.info3
+
+    def write_account(self, dict):
+        self.db_json = dict
+
+        # adicionando o cliente no arquivo .Json
+        with open('db2.json', 'a+') as file:
+            file.write(self.db_json)

@@ -1,6 +1,6 @@
 import json
 from query.bank import Bank
-from query.client import Client
+from query.client import Client, Person
 from query.account import CurrentAccount as current
 from query.account import SavingsAccount as savings
 from random import randint
@@ -81,11 +81,11 @@ while True:
                         # instanciar o cliente e a conta ao banco
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
-                        new_client.name()
-                        new_client.account.details()
-                        p = new_client.account
-                        s = json.dumps(bank.para_dict(p))
-                        print(s)
+                        info = Person(client_name, client_age)
+                        acc = bank.accounts
+                        a = json.dumps(bank.to_dict(info, acc), indent=True)
+                        print(a)
+                        bank.write_account(a)
                         input()
                         os.system('cls')
                         break

@@ -1,6 +1,4 @@
-
 from abc import ABC, abstractmethod
-import json
 
 
 class Accounts(ABC):
@@ -16,28 +14,10 @@ class Accounts(ABC):
         self.balance += value
         self.details()
 
-    def details(self, agency, account, balance=0):
-        self.agency = agency
-        self.account = account
-        self.balance = balance
-        a = agency
-        ac = account
-        with open('db.json', 'r') as file:
-            db_json = file.read()
-            db_json = json.loads(db_json)
-
-            for v in db_json.values():
-                if a == v["Agencia"] and ac == v["Conta"]:
-                    agency = v["Agencia"]
-                    account = v["Conta"]
-                    balance = v["Saldo"]
-                    return agency, account, balance
-            return False
-        '''
+    def details(self):
         print(f'Agência: {self.agency}')
         print(f'Conta: {self.account}')
         print(f'Saldo: {self.balance}')
-        '''
 
     @abstractmethod
     def withdraw(self, value):

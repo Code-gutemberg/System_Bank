@@ -9,6 +9,7 @@ import app.interface as face
 import app.treatment as treat
 import os
 
+
 bank = Bank()
 
 
@@ -67,8 +68,9 @@ while True:
                     face.title('ADICIONAR CLIENTE [+]')
                     client_name = input('Nome: ')
                     client_age = int(input('Idade: '))
+                    client_pass = input('Senha: ')
                     # instanciar o cliente
-                    new_client = Client(client_name, client_age)
+                    new_client = Client(client_name, client_age, client_pass)
                     print('[1] Conta Poupança')
                     print('[2] Conta Corrente')
                     menu_2 = treat.read_int('Digite o código correspondente: ')
@@ -81,12 +83,15 @@ while True:
                         # instanciar o cliente e a conta ao banco
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
-                        info = Person(client_name, client_age)
+                        info = Person(client_name, client_age, client_pass)
                         acc = bank.accounts
-                        a = json.dumps(bank.to_dict(info, acc), indent=4)
-                        print(a)
-                        bank.write_account(a)
+                        a = bank.copy_account()
+                        b = bank.to_dict(info, acc)
+                        print(b)
                         input()
+                        c = {**a, **b}
+                        d = json.dumps(c, indent=4)
+                        bank.write_account(d)
                         os.system('cls')
                         break
                     elif menu_2 == 2:

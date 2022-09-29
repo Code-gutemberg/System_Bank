@@ -1,1 +1,0 @@
-bank.write_account(a)

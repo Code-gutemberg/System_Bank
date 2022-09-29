@@ -1,12 +1,13 @@
 class Person:
-    def __init__(self, name, age):
+    def __init__(self, name, age, password):
         self.name = name
         self.age = age
+        self.password = password
 
 
 class Client(Person):
-    def __init__(self, name, age):
-        super().__init__(name, age)
+    def __init__(self, name, age, password):
+        super().__init__(name, age, password)
         self.account = None
         self._name = name
 

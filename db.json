@@ -1,24 +1,24 @@
 {
-   "Alex Gutemberg": {
-      "name": "Alex Gutemberg",
-      "age": "30",
-      "agency": "0236",
-      "account": "02361-0",
-      "balance": 0,
-      "password": "0000"
-   },
-   "Delis de Almeida": {
-      "name": "Delis de Almeida",
-      "age": "25",
-      "agency": "0236",
-      "account": "02361-1",
-      "balance": 0,
-      "password": "0000"
-   },
-   "Administrador": {
-      "name": "root_",
-      "agency": "0099",
-      "account": "0000-99",
-      "password": "0000"
-   }
+    "Alex Gutemberg": {
+        "name": "Alex Gutemberg",
+        "age": "30",
+        "agency": "0236",
+        "account": "02361-0",
+        "balance": 0,
+        "password": "0000"
+    },
+    "Delis de Almeida": {
+        "name": "Delis de Almeida",
+        "age": "25",
+        "agency": "0236",
+        "account": "02361-1",
+        "balance": 0,
+        "password": "0000"
+    },
+    "Administrador": {
+        "name": "root_",
+        "agency": "0099",
+        "account": "0000-99",
+        "password": "0000"
+    }
 }

@@ -17,6 +17,12 @@ while True:
     ag = input('Agencia: ')
     acc = input('Conta: ')
     pas = input('Senha: ')
+    if acc[-1] == '1':
+        type_acc = 'Conta Poupança'
+    elif acc[-1] == '0':
+        type_acc = 'Conta Corrente'
+    else:
+        type_acc = 'Super Usuário'
     print('Checando banco de dados...')
     sleep(1)
     # Cliente
@@ -29,16 +35,59 @@ while True:
         while True:
             print(f'Usuário: {name}')
             print(f'Agencia: {ag}')
-            print(f'Conta: {acc}')
+            print(f'{type_acc}: {acc}')
             face.title('BANCO DIGITAL - GUTEMBANK')
             face.subtitle()
             menu_1 = treat.read_int('Digite o código correspondente: ')
             if menu_1 == 1:
-                ...
+                os.system('cls')
+                print(f'Usuário: {name}')
+                print(f'Agencia: {ag}')
+                print(f'{type_acc}: {acc}')
+                face.title('SACAR VALOR [-]')
+                value_withdraw = int(input('Digite o valor do saque: R$ '))
+                if type_acc == 'Conta Poupança':
+                    savings.withdraw(name, value_withdraw)
+                    if savings.withdraw(name, value_withdraw) is False:
+                        print('Saldo insuficiente')
+                        input()
+                        os.system('cls')
+                        continue
+                    elif savings.withdraw(name, value_withdraw):
+                        print(f'Valor do saque:{value_withdraw}')
+                        input()
+                        os.system('cls')
+                        continue
+                elif type_acc == 'Conta Corrente':
+                    current.withdraw(name, value_withdraw)
+                    if current.withdraw(name, value_withdraw) is False:
+                        print('Saldo insuficiente')
+                        input()
+                        os.system('cls')
+                        continue
+                    elif current.withdraw(name, value_withdraw):
+                        print(f'Valor do saque:{value_withdraw}')
+                        input()
+                        os.system('cls')
+                        continue
             elif menu_1 == 2:
-                ...
+                os.system('cls')
+                print(f'Usuário: {name}')
+                print(f'Agencia: {ag}')
+                print(f'{type_acc}: {acc}')
+                face.title('DEPOSITAR VALOR [+]')
+                input()
+                os.system('cls')
+                continue
             elif menu_1 == 3:
-                ...
+                os.system('cls')
+                print(f'Usuário: {name}')
+                print(f'Agencia: {ag}')
+                print(f'{type_acc}: {acc}')
+                face.title('CONSULTAR SALDO [...]')
+                input()
+                os.system('cls')
+                continue
             elif menu_1 == 4:
                 face.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
                 sleep(2)
@@ -49,7 +98,7 @@ while True:
                 sleep(2)
                 os.system('cls')
                 continue
-    # Administrador        
+    # Administrador
     elif bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] == 'root_':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
@@ -59,13 +108,16 @@ while True:
         while True:
             print(f'Usuário: {name}')
             print(f'Agencia: {ag}')
-            print(f'Conta: {acc}')
+            print(f'{type_acc}: {acc}')
             face.title('BANCO DIGITAL - GUTEMBANK')
             face.subtitle_adm()
             menu_1 = treat.read_int('Digite o código correspondente: ')
             if menu_1 == 1:
                 while True:
                     os.system('cls')
+                    print(f'Usuário: {name}')
+                    print(f'Agencia: {ag}')
+                    print(f'{type_acc}: {acc}')
                     face.title('ADICIONAR CLIENTE [+]')
                     client_name = input('Nome: ')
                     client_age = int(input('Idade: '))
@@ -118,10 +170,22 @@ while True:
                         continue
             elif menu_1 == 2:
                 os.system('cls')
+                print(f'Usuário: {name}')
+                print(f'Agencia: {ag}')
+                print(f'{type_acc}: {acc}')
                 face.title('REMOVER CLIENTE [-]')
+                input()
+                os.system('cls')
+                continue
             elif menu_1 == 3:
                 os.system('cls')
+                print(f'Usuário: {name}')
+                print(f'Agencia: {ag}')
+                print(f'{type_acc}: {acc}')
                 face.title('CONSULTAR CLIENTE [...]')
+                input()
+                os.system('cls')
+                continue
             elif menu_1 == 4:
                 face.title('[!] PROGRAMA ENCERRADO COM SUCESSO!')
                 sleep(1)
@@ -133,31 +197,8 @@ while True:
                 os.system('cls')
                 continue
     else:
-        print('Usuario não existe')
-        sleep(1)
+        print('Usuario não existe ou senha incorreta')
+        sleep(2)
         os.system('cls')
         continue
     break
-'''
-
-# Instanciando os clientes
-cliente1 = Cliente('Alex', 30)
-cliente2 = Cliente('Delis', 25)
-cliente3 = Cliente('Fabricio', 45)
-
-# Instanciando as contas
-conta1 = ContaCorrente('12345', '0001-01', 0)
-conta2 = ContaPoupanca('56789', '0002-02', 0)
-conta3 = ContaCorrente('09888', '03102-02', 0)
-
-# Instanciando as contas aos clientes
-cliente1.inserir_conta(conta1)
-cliente2.inserir_conta(conta2)
-cliente3.inserir_conta(conta3)
-
-# Inserindo o cliente1 e a conta1 no banco
-banco.inserir_cliente(cliente1)
-banco.inserir_conta(conta1)
-
-
-'''

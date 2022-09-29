@@ -24,9 +24,11 @@ class Bank:
             db_json = file.read()
             db_json = json.loads(db_json)
             for v in db_json.values():
-                if a == v["agency"] and ac == v["account"] and p == v["password"]:
-                    name = v["name"]
-                    return True, name
+                if a == v["agency"]:
+                    if ac == v["account"]:
+                        if p == v["password"]:
+                            name = v["name"]
+                            return True, name
             return False
 
     def to_dict(self, info1, info2):

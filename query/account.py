@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import json
 
 
 class Accounts(ABC):
@@ -30,19 +31,23 @@ class CurrentAccount(Accounts):
         self.limit = limit
 
     def withdraw(self, value):
-        if (self.balance + self.limit) < value:
-            print('Saldo insuficiente')
-            return
-
-        self.balance -= value
-        self.details()
+        with open('db.json', 'r') as file:
+            db_json = file.read()
+            db_json = json.loads(db_json)
+            for name, balance in db_json.items():
+                if name == self:
+                    if (balance["balance"] + balance["limit"]) < value:
+                        return False
+                    return True
 
 
 class SavingsAccount(Accounts):
     def withdraw(self, value):
-        if self.balance < value:
-            print('Saldo insuficiente')
-            return
-
-        self.balance -= value
-        self.details()
+        with open('db.json', 'r+') as file:
+            db_json = file.read()
+            db_json = json.loads(db_json)
+            for name, balance in db_json.items():
+                if name == self:
+                    if balance["balance"] < value:
+                        return False
+                    return True

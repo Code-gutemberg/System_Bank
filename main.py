@@ -12,7 +12,6 @@ import os
 
 bank = Bank()
 
-
 while True:
     face.title('BANCO DIGITAL - GUTEMBANK')
     ag = input('Agencia: ')
@@ -20,6 +19,7 @@ while True:
     pas = input('Senha: ')
     print('Checando banco de dados...')
     sleep(1)
+    # Cliente
     if bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] != 'root_':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
@@ -49,6 +49,7 @@ while True:
                 sleep(2)
                 os.system('cls')
                 continue
+    # Administrador        
     elif bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] == 'root_':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
@@ -84,14 +85,12 @@ while True:
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
                         info = Person(client_name, client_age, client_pass)
-                        acc = bank.accounts
-                        a = bank.copy_account()
-                        b = bank.to_dict(info, acc)
-                        print(b)
-                        input()
-                        c = {**a, **b}
-                        d = json.dumps(c, indent=4)
-                        bank.write_account(d)
+                        saving_acc = bank.accounts
+                        copy_db = bank.copy_db()
+                        full_profile = bank.to_dict(info, saving_acc)
+                        join_dicts = {**copy_db, **full_profile}
+                        json_file = json.dumps(join_dicts, indent=4)
+                        bank.write_account(json_file)
                         os.system('cls')
                         break
                     elif menu_2 == 2:
@@ -103,6 +102,15 @@ while True:
                         # instanciar o cliente e a conta ao banco
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
+                        info = Person(client_name, client_age, client_pass)
+                        current_acc = bank.accounts
+                        copy_db = bank.copy_db()
+                        full_profile = bank.to_dict(info, current_acc)
+                        join_dicts = {**copy_db, **full_profile}
+                        json_file = json.dumps(join_dicts, indent=4)
+                        bank.write_account(json_file)
+                        os.system('cls')
+                        break
                     else:
                         face.error_code()
                         sleep(1)

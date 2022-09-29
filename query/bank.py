@@ -43,8 +43,8 @@ class Bank:
         # Retorna um dicionario
         return self.info4
 
-    def copy_account(self):
-        # Lendo e Copiando tudo do json
+    def copy_db(self):
+        # Lendo e Copiando os dados do db.json
         with open('db.json', 'r') as file:
             db_json = file.read()
             db_json = json.loads(db_json)

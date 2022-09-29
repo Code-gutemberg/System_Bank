@@ -40,11 +40,19 @@ class Bank:
         self.info4 = {}
         # coloca os dicionarios unidos dentro do dicionario nome do cliente
         self.info4[info1["name"]] = self.info3
+        # Retorna um dicionario
         return self.info4
 
-    def write_account(self, _json):
-        self.db_json = _json
-        print(self.db_json)
+    def copy_db(self):
+        # Lendo e Copiando os dados do db.json
+        with open('db.json', 'r') as file:
+            db_json = file.read()
+            db_json = json.loads(db_json)
+            self.copy = db_json.copy()
+            return self.copy
+
+    def write_account(self, entry):
+        self.db_json = entry
         # adicionando o cliente no arquivo .Json
-        with open('db2.json', 'a+') as file2:
+        with open('db.json', 'w') as file2:
             file2.write(self.db_json)

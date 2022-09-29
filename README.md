@@ -34,7 +34,7 @@ Modificar o sistema dividindo em duas partes como cliente e administrador e outr
 * Funções.
 * Manipulação de arquivos formato JSON.
 
-# English translation
+## English translation
 
 ### Summary version 1.2:
 
@@ -97,7 +97,7 @@ Modificações no sistema reorganizando os módulos em pacotes e criando outros 
 * Manipulação de arquivos formato JSON.
 
 
-# English translation
+## English translation
 
 ### Summary version 1.1:
 
@@ -144,7 +144,7 @@ Sistema simples **(prompt command)** de Banco com python orientado a objeto, ond
 * listas.
 
 
-# English translation
+## English translation
 
 ### Summary version 1.0:
 

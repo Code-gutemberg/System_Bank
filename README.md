@@ -7,9 +7,9 @@ Modificar o sistema dividindo em duas partes como cliente e administrador e outr
  - [x] Dividir o programa em 2 partes: Cliente e Administrador.
    - [x] Cliente.
       - [x] Criar sistemática de entrar com usuário cliente.
-      - [ ] Criar sistemática de sacar.
-      - [ ] Criar sistemática de depositar.
-      - [ ] Criar sistemática de consultar Saldo.
+      - [x] Criar sistemática de sacar.
+      - [x] Criar sistemática de depositar.
+      - [x] Criar sistemática de consultar Saldo.
       - [x] Criar sistemática de sair do sistema. 
    - [x] Administrador.
       - [x] Criar sistemática de entrar com usuário Administrador.
@@ -43,9 +43,9 @@ Modify the system by dividing it into two parts like client and administrator an
  - [x] Divide the program into 2 parts: Client and Administrator.
    - [x] Customer.
       - [x] Create input system with customer user.
-      - [ ] Create a withdrawal system.
-      - [ ] Create a deposit system.
-      - [ ] Create a Balance inquiry system.
+      - [x] Create a withdrawal system.
+      - [x] Create a deposit system.
+      - [x] Create a Balance inquiry system.
       - [x] Create system output system.
    - [x] Administrator.
       - [x] Create input system with the Administrator user.

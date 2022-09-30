@@ -1,14 +1,13 @@
-import json
 from query.bank import Bank
 from query.client import Client, Person
-from query.account import CurrentAccount as current
+from query.account import Accounts, CurrentAccount as current
 from query.account import SavingsAccount as savings
 from random import randint
 from time import sleep
 import app.interface as face
 import app.treatment as treat
 import os
-
+import json
 
 bank = Bank()
 
@@ -26,7 +25,7 @@ while True:
     print('Checando banco de dados...')
     sleep(1)
     # Cliente
-    if bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] != 'root_':
+    if bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] != 'root':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
         face.title('INICIANDO SISTEMA')
@@ -45,28 +44,36 @@ while True:
                 print(f'Agencia: {ag}')
                 print(f'{type_acc}: {acc}')
                 face.title('SACAR VALOR [-]')
-                value_withdraw = int(input('Digite o valor do saque: R$ '))
+                withdraw = treat.read_coin('Digite o valor do saque: R$ ')
                 if type_acc == 'Conta Poupança':
-                    savings.withdraw(name, value_withdraw)
-                    if savings.withdraw(name, value_withdraw) is False:
+                    savings.withdraw(name, withdraw)
+                    if savings.withdraw(name, withdraw) is False:
                         print('Saldo insuficiente')
-                        input()
+                        sleep(2)
                         os.system('cls')
                         continue
-                    elif savings.withdraw(name, value_withdraw):
-                        print(f'Valor do saque:{value_withdraw}')
+                    elif savings.withdraw(name, withdraw):
+                        print(f'Valor do saque: {withdraw}')
+                        copy_db = bank.copy_db()
+                        update_db = savings.update(name, copy_db, withdraw)
+                        json_file = json.dumps(update_db, indent=4)
+                        bank.write_account(json_file)
                         input()
                         os.system('cls')
                         continue
                 elif type_acc == 'Conta Corrente':
-                    current.withdraw(name, value_withdraw)
-                    if current.withdraw(name, value_withdraw) is False:
+                    current.withdraw(name, withdraw)
+                    if current.withdraw(name, withdraw) is False:
                         print('Saldo insuficiente')
                         input()
                         os.system('cls')
                         continue
-                    elif current.withdraw(name, value_withdraw):
-                        print(f'Valor do saque:{value_withdraw}')
+                    elif current.withdraw(name, withdraw):
+                        print(f'Valor do saque: {withdraw}')
+                        copy_db = bank.copy_db()
+                        update_db = current.update(name, copy_db, withdraw)
+                        json_file = json.dumps(update_db, indent=4)
+                        bank.write_account(json_file)
                         input()
                         os.system('cls')
                         continue
@@ -76,15 +83,33 @@ while True:
                 print(f'Agencia: {ag}')
                 print(f'{type_acc}: {acc}')
                 face.title('DEPOSITAR VALOR [+]')
-                input()
-                os.system('cls')
-                continue
+                deposit = treat.read_coin('Digite o valor do depósito: R$ ')
+                if type_acc == 'Conta Poupança':
+                    copy_db = bank.copy_db()
+                    update_db = savings.deposit(name, copy_db, deposit)
+                    json_file = json.dumps(update_db, indent=4)
+                    bank.write_account(json_file)
+                    print(f'Valor do Depósito: {deposit}')
+                    input()
+                    os.system('cls')
+                    continue
+                elif type_acc == 'Conta Corrente':
+                    copy_db = bank.copy_db()
+                    update_db = current.deposit(name, copy_db, deposit)
+                    json_file = json.dumps(update_db, indent=4)
+                    bank.write_account(json_file)
+                    print(f'Valor do Depósito: {deposit}')
+                    input()
+                    os.system('cls')
+                    continue
             elif menu_1 == 3:
                 os.system('cls')
                 print(f'Usuário: {name}')
                 print(f'Agencia: {ag}')
                 print(f'{type_acc}: {acc}')
                 face.title('CONSULTAR SALDO [...]')
+                copy_db = bank.copy_db()
+                Accounts.details(name, copy_db)
                 input()
                 os.system('cls')
                 continue
@@ -99,7 +124,7 @@ while True:
                 os.system('cls')
                 continue
     # Administrador
-    elif bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] == 'root_':
+    elif bank.auth(ag, acc, pas) and bank.auth(ag, acc, pas)[1] == 'root':
         name = bank.auth(ag, acc, pas)[1]
         print('[SUCESS] - Usuário autenticado')
         face.title('INICIANDO SISTEMA')
@@ -174,9 +199,15 @@ while True:
                 print(f'Agencia: {ag}')
                 print(f'{type_acc}: {acc}')
                 face.title('REMOVER CLIENTE [-]')
+                entry = input('Digite o nome do cliente: ')
+                copy_db = bank.copy_db()
+                update_db = bank.remove_account(copy_db, entry)
+                json_file = json.dumps(update_db, indent=4)
+                bank.write_account(json_file)
                 input()
                 os.system('cls')
                 continue
+                    
             elif menu_1 == 3:
                 os.system('cls')
                 print(f'Usuário: {name}')

@@ -1,28 +1,18 @@
-from abc import ABC, abstractmethod
 import json
 
 
-class Accounts(ABC):
+class Accounts():
     def __init__(self, agency, account, balance):
         self.agency = agency
         self.account = account
         self.balance = balance
 
-    def deposit(self, value):
-        if not isinstance(value, (int, float)):
-            raise ValueError('valor do depósito precisa ser numérico')
-
-        self.balance += value
-        self.details()
-
-    def details(self):
-        print(f'Agência: {self.agency}')
-        print(f'Conta: {self.account}')
-        print(f'Saldo: {self.balance}')
-
-    @abstractmethod
-    def withdraw(self, value):
-        ...
+    def details(self, dict):
+        for name, details in dict.items():
+            if name == self:
+                print('=' * 50)
+                print(f'Saldo: R$ {details["balance"]}')
+                print('=' * 50)
 
 
 class CurrentAccount(Accounts):
@@ -31,6 +21,9 @@ class CurrentAccount(Accounts):
         self.limit = limit
 
     def withdraw(self, value):
+        # Recebe nome e valor
+        # retorna Falso se o saque for maior que a soma do saldo e limite
+        # retorna True se saldo suficiente
         with open('db.json', 'r') as file:
             db_json = file.read()
             db_json = json.loads(db_json)
@@ -40,10 +33,29 @@ class CurrentAccount(Accounts):
                         return False
                     return True
 
+    def update(self, dict, value):
+        # Recebe nome, db dict e valor
+        # Retorna o dict atualizado com o desconto do valor
+        for name, balance in dict.items():
+            if name == self:
+                balance["balance"] -= value
+                return dict
+
+    def deposit(self, dict, value):
+        # Recebe nome, db dict e valor
+        # Retorna o dict atualizado com o desconto do valor
+        for name, balance in dict.items():
+            if name == self:
+                balance["balance"] += value
+                return dict
+
 
 class SavingsAccount(Accounts):
     def withdraw(self, value):
-        with open('db.json', 'r+') as file:
+        # Recebe nome e valor
+        # retorna Falso se saldo insuficiente
+        # retorna True se saldo suficiente
+        with open('db.json', 'r') as file:
             db_json = file.read()
             db_json = json.loads(db_json)
             for name, balance in db_json.items():
@@ -51,3 +63,19 @@ class SavingsAccount(Accounts):
                     if balance["balance"] < value:
                         return False
                     return True
+
+    def update(self, dict, value):
+        # Recebe nome, db dict e valor
+        # Retorna o dict atualizado com o desconto do valor
+        for name, balance in dict.items():
+            if name == self:
+                balance["balance"] -= value
+                return dict
+
+    def deposit(self, dict, value):
+        # Recebe nome, db dict e valor
+        # Retorna o dict atualizado com o desconto do valor
+        for name, balance in dict.items():
+            if name == self:
+                balance["balance"] += value
+                return dict

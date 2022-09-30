@@ -1,7 +1,7 @@
 import json
 
 
-class Bank:
+class Bank():
     def __init__(self):
         self.clients = {}
         self.accounts = {}
@@ -47,6 +47,7 @@ class Bank:
 
     def copy_db(self):
         # Lendo e Copiando os dados do db.json
+        # retorna dicionario
         with open('db.json', 'r') as file:
             db_json = file.read()
             db_json = json.loads(db_json)
@@ -58,3 +59,10 @@ class Bank:
         # adicionando o cliente no arquivo .Json
         with open('db.json', 'w') as file2:
             file2.write(self.db_json)
+
+    def remove_account(self, dict, entry):
+        for name in dict:
+            if entry == name:
+                del dict[name]
+                return dict
+        print('Usuário Inexistente.')

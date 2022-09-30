@@ -8,7 +8,7 @@ def subtitle():
     menu = dict()
     menu[1] = 'Sacar Valor \t[ - ]'
     menu[2] = 'Depositar Valor \t[ + ]'
-    menu[3] = 'Consultar Saldo \t[...]'
+    menu[3] = 'Consultar Saldo\t[...]'
     menu[4] = 'Sair do Sistema \t[ ! ]'
     for k, v in menu.items():
         print(f'{k} - {v}')

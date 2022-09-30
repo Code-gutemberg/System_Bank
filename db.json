@@ -1,9 +1,9 @@
 {
-    "Administrador": {
-        "name": "root_",
-        "agency": "0099",
-        "account": "0000-99",
-        "password": "0000"
+    "root": {
+        "name": "root",
+        "agency": " ",
+        "account": " ",
+        "password": " "
     },
     "Alex Gutemberg": {
         "name": "Alex Gutemberg",
@@ -19,7 +19,7 @@
         "password": "0125",
         "agency": "0236",
         "account": "023640-1",
-        "balance": 0
+        "balance": 175.0
     },
     "Delis Almeida": {
         "name": "Delis Almeida",
@@ -27,7 +27,7 @@
         "password": "0258",
         "agency": "0236",
         "account": "023659-0",
-        "balance": 0,
+        "balance": 250.0,
         "limit": 100
     }
 }

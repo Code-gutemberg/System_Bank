@@ -7,7 +7,7 @@
     },
     "Alex Gutemberg": {
         "name": "Alex Gutemberg",
-        "age": 30,
+        "cpf": "054.649.525-78",
         "password": "Snj42ekveg@",
         "agency": "0236",
         "account": "023694-1",
@@ -15,15 +15,15 @@
     },
     "Gilberto": {
         "name": "Gilberto",
-        "age": 45,
+        "cpf": "055.897.258-14",
         "password": "0125",
         "agency": "0236",
         "account": "023640-1",
-        "balance": 175.0
+        "balance": 110.0
     },
     "Delis Almeida": {
         "name": "Delis Almeida",
-        "age": 25,
+        "cpf": "074.236.575-14",
         "password": "0258",
         "agency": "0236",
         "account": "023659-0",

@@ -16,12 +16,15 @@ while True:
     ag = input('Agencia: ')
     acc = input('Conta: ')
     pas = input('Senha: ')
-    if acc[-1] == '1':
-        type_acc = 'Conta Poupança'
-    elif acc[-1] == '0':
-        type_acc = 'Conta Corrente'
-    else:
-        type_acc = 'Super Usuário'
+    try:
+        if acc[-1] == '1':
+            type_acc = 'Conta Poupança'
+        elif acc[-1] == '0':
+            type_acc = 'Conta Corrente'
+        elif acc == ' ':
+            type_acc = 'Super Usuário'
+    except Exception:
+        acc = ''
     print('Checando banco de dados...')
     sleep(1)
     # Cliente
@@ -48,33 +51,33 @@ while True:
                 if type_acc == 'Conta Poupança':
                     savings.withdraw(name, withdraw)
                     if savings.withdraw(name, withdraw) is False:
-                        print('Saldo insuficiente')
+                        face.title('SALDO INSUFICIENTE')
                         sleep(2)
                         os.system('cls')
                         continue
                     elif savings.withdraw(name, withdraw):
-                        print(f'Valor do saque: {withdraw}')
+                        face.title(f'VALOR DO SAQUE: R$ {withdraw}')
                         copy_db = bank.copy_db()
                         update_db = savings.update(name, copy_db, withdraw)
                         json_file = json.dumps(update_db, indent=4)
                         bank.write_account(json_file)
-                        input()
+                        sleep(2)
                         os.system('cls')
                         continue
                 elif type_acc == 'Conta Corrente':
                     current.withdraw(name, withdraw)
                     if current.withdraw(name, withdraw) is False:
-                        print('Saldo insuficiente')
-                        input()
+                        face.title('SALDO INSUFICIENTE')
+                        sleep(2)
                         os.system('cls')
                         continue
                     elif current.withdraw(name, withdraw):
-                        print(f'Valor do saque: {withdraw}')
+                        face.title(f'VALOR DO SAQUE: R$ {withdraw}')
                         copy_db = bank.copy_db()
                         update_db = current.update(name, copy_db, withdraw)
                         json_file = json.dumps(update_db, indent=4)
                         bank.write_account(json_file)
-                        input()
+                        sleep(2)
                         os.system('cls')
                         continue
             elif menu_1 == 2:
@@ -89,8 +92,8 @@ while True:
                     update_db = savings.deposit(name, copy_db, deposit)
                     json_file = json.dumps(update_db, indent=4)
                     bank.write_account(json_file)
-                    print(f'Valor do Depósito: {deposit}')
-                    input()
+                    face.title(f'VALOR DO DEPÓSITO: R$ {deposit}')
+                    sleep(2)
                     os.system('cls')
                     continue
                 elif type_acc == 'Conta Corrente':
@@ -98,8 +101,8 @@ while True:
                     update_db = current.deposit(name, copy_db, deposit)
                     json_file = json.dumps(update_db, indent=4)
                     bank.write_account(json_file)
-                    print(f'Valor do Depósito: {deposit}')
-                    input()
+                    face.title(f'VALOR DO DEPÓSITO: R$ {deposit}')
+                    sleep(2)
                     os.system('cls')
                     continue
             elif menu_1 == 3:
@@ -110,7 +113,6 @@ while True:
                 face.title('CONSULTAR SALDO [...]')
                 copy_db = bank.copy_db()
                 Accounts.details(name, copy_db)
-                input()
                 os.system('cls')
                 continue
             elif menu_1 == 4:
@@ -144,24 +146,25 @@ while True:
                     print(f'Agencia: {ag}')
                     print(f'{type_acc}: {acc}')
                     face.title('ADICIONAR CLIENTE [+]')
-                    client_name = input('Nome: ')
-                    client_age = int(input('Idade: '))
+                    client_name = treat.read_name('Nome: ')
+                    client_cpf = treat.read_cpf('CPF: ')
                     client_pass = input('Senha: ')
                     # instanciar o cliente
-                    new_client = Client(client_name, client_age, client_pass)
+                    new_client = Client(client_name, client_cpf, client_pass)
                     print('[1] Conta Poupança')
                     print('[2] Conta Corrente')
                     menu_2 = treat.read_int('Digite o código correspondente: ')
                     if menu_2 == 1:
+                        # Gera número aleatório da conta
                         new_number = str(randint(0, 100))
-                        # instanciar a conta
+                        # instancia a conta
                         new_acc = savings('0236', '0236'+new_number+'-1', 0)
-                        # instanciar a conta para o cliente
+                        # instancia a conta para o cliente
                         new_client.insert_account(new_acc)
-                        # instanciar o cliente e a conta ao banco
+                        # instancia o cliente e a conta ao banco
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
-                        info = Person(client_name, client_age, client_pass)
+                        info = Person(client_name, client_cpf, client_pass)
                         saving_acc = bank.accounts
                         copy_db = bank.copy_db()
                         full_profile = bank.to_dict(info, saving_acc)
@@ -171,15 +174,16 @@ while True:
                         os.system('cls')
                         break
                     elif menu_2 == 2:
+                        # Gera número aleatório da conta
                         new_number = str(randint(0, 100))
-                        # instanciar a conta
+                        # instancia a conta
                         new_acc = current('0236', '0236'+new_number+'-0', 0)
-                        # instanciar a conta para o cliente
+                        # instancia a conta para o cliente
                         new_client.insert_account(new_acc)
-                        # instanciar o cliente e a conta ao banco
+                        # instancia o cliente e a conta ao banco
                         bank.insert_client(new_client)
                         bank.insert_account(new_acc)
-                        info = Person(client_name, client_age, client_pass)
+                        info = Person(client_name, client_cpf, client_pass)
                         current_acc = bank.accounts
                         copy_db = bank.copy_db()
                         full_profile = bank.to_dict(info, current_acc)
@@ -204,17 +208,22 @@ while True:
                 update_db = bank.remove_account(copy_db, entry)
                 json_file = json.dumps(update_db, indent=4)
                 bank.write_account(json_file)
-                input()
+                sleep(2)
                 os.system('cls')
                 continue
-                    
             elif menu_1 == 3:
                 os.system('cls')
                 print(f'Usuário: {name}')
                 print(f'Agencia: {ag}')
                 print(f'{type_acc}: {acc}')
                 face.title('CONSULTAR CLIENTE [...]')
-                input()
+                entry = input('Digite o nome do cliente: ')
+                copy_db = bank.copy_db()
+                if Accounts.details(entry, copy_db) is False:
+                    face.title('USUÁRIO INEXISTENTE')
+                    sleep(2)
+                    os.system('cls')
+                    continue
                 os.system('cls')
                 continue
             elif menu_1 == 4:

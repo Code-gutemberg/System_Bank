@@ -16,8 +16,8 @@ Modificar o sistema dividindo em duas partes como cliente e administrador e outr
       - [x] Criar sistemática de adicionar cliente.
          - [x] Adicionar cliente com conta poupança.
          - [x] Adicionar cliente com conta corrente.
-      - [ ] Criar sistemática de remover cliente.
-      - [ ] Criar sistemática de consultar cliente.
+      - [x] Criar sistemática de remover cliente.
+      - [x] Criar sistemática de consultar cliente.
       - [x] Criar sistemática de sair do sistema. 
 
 
@@ -52,8 +52,8 @@ Modify the system by dividing it into two parts like client and administrator an
       - [x] Create a system to add customer.
          - [x] Add customer with savings account.
          - [x] Add customer with checking account.
-      - [ ] Create client remover system.
-      - [ ] Create a customer consultation system.
+      - [x] Create client remover system.
+      - [x] Create a customer consultation system.
       - [x] Create system output system.
 
 

@@ -51,33 +51,33 @@ while True:
                 if type_acc == 'Conta Poupança':
                     savings.withdraw(name, withdraw)
                     if savings.withdraw(name, withdraw) is False:
-                        print('Saldo insuficiente')
+                        face.title('SALDO INSUFICIENTE')
                         sleep(2)
                         os.system('cls')
                         continue
                     elif savings.withdraw(name, withdraw):
-                        print(f'Valor do saque: {withdraw}')
+                        face.title(f'VALOR DO SAQUE: R$ {withdraw}')
                         copy_db = bank.copy_db()
                         update_db = savings.update(name, copy_db, withdraw)
                         json_file = json.dumps(update_db, indent=4)
                         bank.write_account(json_file)
-                        input()
+                        sleep(2)
                         os.system('cls')
                         continue
                 elif type_acc == 'Conta Corrente':
                     current.withdraw(name, withdraw)
                     if current.withdraw(name, withdraw) is False:
-                        print('Saldo insuficiente')
-                        input()
+                        face.title('SALDO INSUFICIENTE')
+                        sleep(2)
                         os.system('cls')
                         continue
                     elif current.withdraw(name, withdraw):
-                        print(f'Valor do saque: {withdraw}')
+                        face.title(f'VALOR DO SAQUE: R$ {withdraw}')
                         copy_db = bank.copy_db()
                         update_db = current.update(name, copy_db, withdraw)
                         json_file = json.dumps(update_db, indent=4)
                         bank.write_account(json_file)
-                        input()
+                        sleep(2)
                         os.system('cls')
                         continue
             elif menu_1 == 2:
@@ -92,8 +92,8 @@ while True:
                     update_db = savings.deposit(name, copy_db, deposit)
                     json_file = json.dumps(update_db, indent=4)
                     bank.write_account(json_file)
-                    print(f'Valor do Depósito: {deposit}')
-                    input()
+                    face.title(f'VALOR DO DEPÓSITO: R$ {deposit}')
+                    sleep(2)
                     os.system('cls')
                     continue
                 elif type_acc == 'Conta Corrente':
@@ -101,8 +101,8 @@ while True:
                     update_db = current.deposit(name, copy_db, deposit)
                     json_file = json.dumps(update_db, indent=4)
                     bank.write_account(json_file)
-                    print(f'Valor do Depósito: {deposit}')
-                    input()
+                    face.title(f'VALOR DO DEPÓSITO: R$ {deposit}')
+                    sleep(2)
                     os.system('cls')
                     continue
             elif menu_1 == 3:
@@ -113,7 +113,6 @@ while True:
                 face.title('CONSULTAR SALDO [...]')
                 copy_db = bank.copy_db()
                 Accounts.details(name, copy_db)
-                input()
                 os.system('cls')
                 continue
             elif menu_1 == 4:

@@ -1,4 +1,6 @@
 import json
+from query.account import Accounts as acc
+import app.interface as face
 
 
 class Bank():
@@ -62,7 +64,22 @@ class Bank():
 
     def remove_account(self, dict, entry):
         for name in dict:
-            if entry == name:
-                del dict[name]
+            if entry == 'root':
+                face.title('Usuário protegido pelo administrador!')
                 return dict
-        print('Usuário Inexistente.')
+            elif entry == name:
+                acc.details(name, self.copy_db())
+                while True:
+                    menu = input('Deseja excluir [S/N]: ')[0]
+                    if menu in 'Ss':
+                        face.title('EXCLUIDO COM SUCESSO!')
+                        del dict[name]
+                        return dict
+                    if menu in 'Nn':
+                        face.title('EXCLUSÃO CANCELADA!')
+                        break
+                    else:
+                        print('Digite Sim ou Não.')
+                return dict
+        face.title('USUÁRIO INEXISTENTE!')
+        return dict

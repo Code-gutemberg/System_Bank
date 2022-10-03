@@ -1,4 +1,5 @@
 import json
+import app.interface as face
 
 
 class Accounts():
@@ -9,10 +10,21 @@ class Accounts():
 
     def details(self, dict):
         for name, details in dict.items():
-            if name == self:
+            if self == 'root':
+                face.title('Usuário protegido pelo administrador!')
+                input()
+                return True
+            elif name == self:
                 print('=' * 50)
+                print(f'Nome: {details["name"]}')
+                print(f'CPF: {details["cpf"]}')
+                print(f'Agencia: {details["agency"]}')
+                print(f'Conta: {details["account"]}')
                 print(f'Saldo: R$ {details["balance"]}')
                 print('=' * 50)
+                input()
+                return True
+        return False
 
 
 class CurrentAccount(Accounts):
